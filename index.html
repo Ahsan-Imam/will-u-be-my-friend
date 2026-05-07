@@ -326,6 +326,102 @@
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .card {
+        padding: 40px 25px;
+        border-radius: 24px;
+        width: 92%;
+        max-width: 380px;
+      }
+
+      .emoji-top {
+        font-size: 3.5rem;
+      }
+
+      .question {
+        font-size: 1.4rem;
+        line-height: 1.4;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 30px;
+      }
+
+      .btn-yes {
+        padding: 14px 32px;
+        font-size: 1rem;
+      }
+
+      .btn-no {
+        padding: 12px 32px;
+        font-size: 1rem;
+      }
+
+      .success-emoji {
+        font-size: 4rem;
+      }
+
+      .success-text {
+        font-size: 1.5rem;
+      }
+
+      .success-sub {
+        font-size: 0.95rem;
+      }
+
+      .orb-1 {
+        width: 180px;
+        height: 180px;
+      }
+
+      .orb-2 {
+        width: 150px;
+        height: 150px;
+      }
+
+      .orb-3 {
+        width: 120px;
+        height: 120px;
+      }
+
+      .no-tooltip {
+        font-size: 0.7rem;
+        padding: 5px 12px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .card {
+        padding: 30px 18px;
+        border-radius: 20px;
+      }
+
+      .emoji-top {
+        font-size: 3rem;
+      }
+
+      .question {
+        font-size: 1.2rem;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 25px;
+      }
+
+      .btn-yes {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+      }
+
+      .btn-no {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -419,6 +515,8 @@
       const yesBtn = document.getElementById('btnYes');
       const cardEl = document.getElementById('card');
 
+      const isMobile = window.innerWidth <= 600;
+
       if (escapeCount >= 10) {
         // Full screen takeover
         yesBtn.style.position = 'fixed';
@@ -427,10 +525,10 @@
         yesBtn.style.width = '100vw';
         yesBtn.style.height = '100vh';
         yesBtn.style.borderRadius = '0';
-        yesBtn.style.fontSize = '4rem';
+        yesBtn.style.fontSize = isMobile ? '2rem' : '4rem';
         yesBtn.style.zIndex = '9999';
         yesBtn.style.transform = 'none';
-        yesBtn.style.padding = '0';
+        yesBtn.style.padding = '20px';
         yesBtn.style.display = 'flex';
         yesBtn.style.alignItems = 'center';
         yesBtn.style.justifyContent = 'center';
@@ -442,12 +540,17 @@
         noTooltip.style.display = 'none';
         cardEl.style.zIndex = '10000';
       } else {
-        const scale = 1 + (escapeCount * 0.25);
-        const fontSize = 1.15 + (escapeCount * 0.25);
-        const padding = 16 + (escapeCount * 6);
-        yesBtn.style.transform = `scale(${Math.min(scale, 4)})`;
-        yesBtn.style.fontSize = `${Math.min(fontSize, 3.5)}rem`;
-        yesBtn.style.padding = `${Math.min(padding, 50)}px ${Math.min(padding * 2.5, 120)}px`;
+        const growRate = isMobile ? 0.15 : 0.25;
+        const scale = 1 + (escapeCount * growRate);
+        const maxScale = isMobile ? 2.5 : 4;
+        const fontSize = (isMobile ? 1 : 1.15) + (escapeCount * growRate);
+        const maxFont = isMobile ? 2 : 3.5;
+        const padding = (isMobile ? 12 : 16) + (escapeCount * (isMobile ? 4 : 6));
+        const maxPad = isMobile ? 35 : 50;
+        const maxPadX = isMobile ? 70 : 120;
+        yesBtn.style.transform = `scale(${Math.min(scale, maxScale)})`;
+        yesBtn.style.fontSize = `${Math.min(fontSize, maxFont)}rem`;
+        yesBtn.style.padding = `${Math.min(padding, maxPad)}px ${Math.min(padding * 2.5, maxPadX)}px`;
         yesBtn.style.boxShadow = `0 ${8 + escapeCount * 4}px ${30 + escapeCount * 10}px rgba(255, 107, 157, ${Math.min(0.4 + escapeCount * 0.06, 0.95)})`;
       }
     }
