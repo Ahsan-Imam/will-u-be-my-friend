@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Will You Be My Friend? 💖</title>
+  <title>I'm Sorry 💔 Please Forgive Me</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
@@ -334,23 +334,23 @@
   <div class="card" id="card">
     <div class="main-content" id="mainContent">
       <div class="emoji-top">🥺</div>
-      <h1 class="question">Will you be my friend?</h1>
-      <p class="subtitle">Pretty please? It would mean the world to me ✨</p>
+      <h1 class="question">I'm really sorry... Will you forgive me?</h1>
+      <p class="subtitle">I know I messed up. Please give me another chance 🙏</p>
       <div class="buttons">
-        <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes! 💖</button>
+        <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes, I forgive you 💖</button>
       </div>
     </div>
 
     <div class="success-screen" id="successScreen">
-      <div class="success-emoji">🎉</div>
-      <h2 class="success-text">Yay! We're friends!</h2>
-      <p class="success-sub">You just made my day! 💕🥳</p>
+      <div class="success-emoji">🥹</div>
+      <h2 class="success-text">Thank you so much!</h2>
+      <p class="success-sub">I promise I'll never make you upset again 💕🤞</p>
     </div>
   </div>
 
   <!-- The No button lives outside the card so it can roam freely -->
-  <button class="btn-no" id="btnNo">No 😢</button>
-  <div class="no-tooltip" id="noTooltip">You can't catch me! 😜</div>
+  <button class="btn-no" id="btnNo">No 😤</button>
+  <div class="no-tooltip" id="noTooltip">Please don't say no! 🥺</div>
 
   <script>
     const btnNo = document.getElementById('btnNo');
@@ -359,16 +359,16 @@
     let escapeCount = 0;
 
     const taunts = [
-      "You can't catch me! 😜",
-      "Nope, not here! 🏃‍♂️",
-      "Try again! 😂",
-      "Too slow! ⚡",
-      "Haha nice try! 🤭",
-      "Just click Yes! 💖",
-      "I'm too fast! 🚀",
-      "Wrong button! 😏",
-      "Keep trying... NOT! 😎",
-      "Maybe give up? 😇"
+      "Please don't say no! 🥺",
+      "I'm truly sorry! 😢",
+      "Give me a chance! 🙏",
+      "I didn't mean it! 💔",
+      "Please forgive me! 😭",
+      "Just click forgive! 💖",
+      "I'll do better! 🤞",
+      "Wrong button! Try forgive! 😏",
+      "You know you want to forgive me 🥹",
+      "I can't lose you! 😿"
     ];
 
     // Position the No button initially next to the card
@@ -481,7 +481,7 @@
     // Floating hearts
     function createFloatingHearts() {
       const container = document.getElementById('heartsBg');
-      const hearts = ['💖', '💕', '✨', '💗', '🌸', '💜', '💫'];
+      const hearts = ['💔', '🥺', '🙏', '😢', '💖', '🤞', '💫'];
       for (let i = 0; i < 20; i++) {
         const heart = document.createElement('div');
         heart.classList.add('floating-heart');
