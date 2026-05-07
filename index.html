@@ -409,10 +409,15 @@
       noTooltip.classList.add('show');
       setTimeout(() => noTooltip.classList.remove('show'), 1200);
 
-      // Make Yes button grow slightly each time
+      // Make Yes button grow BIG each time
       const yesBtn = document.getElementById('btnYes');
-      const scale = 1 + (escapeCount * 0.05);
-      yesBtn.style.transform = `scale(${Math.min(scale, 1.5)})`;
+      const scale = 1 + (escapeCount * 0.15);
+      const fontSize = 1.15 + (escapeCount * 0.15);
+      const padding = 16 + (escapeCount * 4);
+      yesBtn.style.transform = `scale(${Math.min(scale, 3)})`;
+      yesBtn.style.fontSize = `${Math.min(fontSize, 3)}rem`;
+      yesBtn.style.padding = `${Math.min(padding, 40)}px ${Math.min(padding * 2.5, 100)}px`;
+      yesBtn.style.boxShadow = `0 ${8 + escapeCount * 3}px ${30 + escapeCount * 8}px rgba(255, 107, 157, ${Math.min(0.4 + escapeCount * 0.05, 0.9)})`;
     }
 
     // Escape on hover, touch, and click
