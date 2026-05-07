@@ -320,6 +320,12 @@
     .no-tooltip.show {
       opacity: 1;
     }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
   </style>
 </head>
 <body>
@@ -409,15 +415,41 @@
       noTooltip.classList.add('show');
       setTimeout(() => noTooltip.classList.remove('show'), 1200);
 
-      // Make Yes button grow BIG each time
+      // Make Yes button grow until it fills the ENTIRE screen
       const yesBtn = document.getElementById('btnYes');
-      const scale = 1 + (escapeCount * 0.15);
-      const fontSize = 1.15 + (escapeCount * 0.15);
-      const padding = 16 + (escapeCount * 4);
-      yesBtn.style.transform = `scale(${Math.min(scale, 3)})`;
-      yesBtn.style.fontSize = `${Math.min(fontSize, 3)}rem`;
-      yesBtn.style.padding = `${Math.min(padding, 40)}px ${Math.min(padding * 2.5, 100)}px`;
-      yesBtn.style.boxShadow = `0 ${8 + escapeCount * 3}px ${30 + escapeCount * 8}px rgba(255, 107, 157, ${Math.min(0.4 + escapeCount * 0.05, 0.9)})`;
+      const cardEl = document.getElementById('card');
+
+      if (escapeCount >= 10) {
+        // Full screen takeover
+        yesBtn.style.position = 'fixed';
+        yesBtn.style.top = '0';
+        yesBtn.style.left = '0';
+        yesBtn.style.width = '100vw';
+        yesBtn.style.height = '100vh';
+        yesBtn.style.borderRadius = '0';
+        yesBtn.style.fontSize = '4rem';
+        yesBtn.style.zIndex = '9999';
+        yesBtn.style.transform = 'none';
+        yesBtn.style.padding = '0';
+        yesBtn.style.display = 'flex';
+        yesBtn.style.alignItems = 'center';
+        yesBtn.style.justifyContent = 'center';
+        yesBtn.style.boxShadow = 'none';
+        yesBtn.style.background = 'linear-gradient(135deg, #ff6b9d, #c084fc, #ff6b9d)';
+        yesBtn.style.backgroundSize = '200% 200%';
+        yesBtn.style.animation = 'gradientShift 2s ease infinite';
+        btnNo.style.display = 'none';
+        noTooltip.style.display = 'none';
+        cardEl.style.zIndex = '10000';
+      } else {
+        const scale = 1 + (escapeCount * 0.25);
+        const fontSize = 1.15 + (escapeCount * 0.25);
+        const padding = 16 + (escapeCount * 6);
+        yesBtn.style.transform = `scale(${Math.min(scale, 4)})`;
+        yesBtn.style.fontSize = `${Math.min(fontSize, 3.5)}rem`;
+        yesBtn.style.padding = `${Math.min(padding, 50)}px ${Math.min(padding * 2.5, 120)}px`;
+        yesBtn.style.boxShadow = `0 ${8 + escapeCount * 4}px ${30 + escapeCount * 10}px rgba(255, 107, 157, ${Math.min(0.4 + escapeCount * 0.06, 0.95)})`;
+      }
     }
 
     // Escape on hover, touch, and click
